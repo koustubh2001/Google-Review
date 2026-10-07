@@ -1,0 +1,210 @@
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.summary-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e7ebf2;
+  border-radius: 20px;
+  padding: 22px 20px;
+  min-height: 135px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: cardFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 80ms);
+}
+
+.summary-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.08);
+}
+
+/* Background Ambient Glow on Hover */
+.card-ambient-glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  filter: blur(28px);
+}
+
+.summary-card:hover .card-ambient-glow {
+  opacity: 0.85;
+}
+
+/* Theme Varients */
+/* 1. Reviews: Purple */
+.card-reviews:hover {
+  border-color: #c7d2fe;
+}
+.card-reviews .card-ambient-glow {
+  background: rgba(99, 66, 232, 0.16);
+}
+.icon-reviews {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  color: #6342e8;
+  border: 1px solid rgba(99, 66, 232, 0.12);
+}
+
+/* 2. Rating: Amber */
+.card-rating:hover {
+  border-color: #fde68a;
+}
+.card-rating .card-ambient-glow {
+  background: rgba(245, 158, 11, 0.18);
+}
+.icon-rating {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+/* 3. Positive: Emerald */
+.card-positive:hover {
+  border-color: #a7f3d0;
+}
+.card-positive .card-ambient-glow {
+  background: rgba(16, 185, 129, 0.18);
+}
+.icon-positive {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+/* 4. Negative: Rose/Coral */
+.card-negative:hover {
+  border-color: #fecdd3;
+}
+.card-negative .card-ambient-glow {
+  background: rgba(244, 63, 94, 0.16);
+}
+.icon-negative {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  color: #e11d48;
+  border: 1px solid rgba(244, 63, 94, 0.15);
+}
+
+/* Icon Badges */
+.summary-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.summary-icon-wrapper svg {
+  width: 22px;
+  height: 22px;
+}
+
+.summary-card:hover .summary-icon-wrapper {
+  transform: scale(1.1) rotate(-4deg);
+}
+
+/* Content Details */
+.summary-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-card-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.summary-card-value {
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.rating-out-of {
+  font-size: 15px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+.summary-card-subtext {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keyframes */
+@keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1080px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .summary-card {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .summary-icon-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .summary-card-value {
+    font-size: 21px;
+  }
+}
